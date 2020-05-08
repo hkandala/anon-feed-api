@@ -7,3 +7,4 @@ tasks:
       python3 -m flask run
 ports:
   - port: 5000
+    onOpen: open-browser
