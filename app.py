@@ -35,7 +35,7 @@ def get_all_session_ids():
 def fetch_session(session_id):
     safe_session_id = escape(session_id)
     if safe_session_id in db:
-        return jsonify(db[safe_session_id])
+        return jsonify(list(reversed(db[safe_session_id])))
     else:
         return send_error("E001")
 
@@ -49,8 +49,6 @@ def add_feedback(session_id):
     feedback_message = request.args.get("msg")
     if feedback_message is None:
         return send_error("E002")
-
-    feedback_message = escape(feedback_message)
 
     if len(feedback_message) > 500:
         return send_error("E003")
