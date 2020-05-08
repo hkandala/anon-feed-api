@@ -4,9 +4,11 @@ import string
 from flask import Flask
 from flask import request
 from flask import jsonify
+from flask_cors import CORS
 from markupsafe import escape
 
 app = Flask(__name__)
+CORS(app)
 
 db = {}
 
@@ -75,6 +77,9 @@ def send_error(error_code):
     error_list = {
         "E001": ("Session ID not found", 404),
         "E002": ("No feedback message found", 400),
-        "E003": ("Feedback message has crossed the maximum limit of 512 characters", 400),
+        "E003": (
+            "Feedback message has crossed the maximum limit of 512 characters",
+            400,
+        ),
     }
     return jsonify({"error": error_list[error_code][0]}), error_list[error_code][1]
