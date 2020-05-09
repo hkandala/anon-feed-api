@@ -58,18 +58,6 @@ def add_feedback(session_id):
     return jsonify({"success": True})
 
 
-@app.route("/session/<session_id>/feedback/delete/<feedback_index>/")
-def delete_feedback(session_id, feedback_index):
-    safe_session_id = escape(session_id)
-    safe_feedback_id = escape(feedback_index)
-
-    try:
-        db[safe_session_id].pop(int(feedback_index))
-        return jsonify({"success": True})
-    except:
-        return jsonify({"success": False})
-
-
 def get_session_id():
     session_id = get_random_str(6)
     while session_id in db:
